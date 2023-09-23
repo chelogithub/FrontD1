@@ -1,0 +1,179 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+          <ion-icon slot="icon-only" name="arrow-back" onClick="history.go(-1);"></ion-icon>
+  </ion-buttons>
+    <ion-title style="text-align:center">Parámetros de dispositivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div style="text-align:center" *ngIf="!this.dbStatus">
+  <br>
+    <h2>¡OPS! No se pudo acceder a la Base de Datos</h2>
+    <br>
+      <img  src="../../assets/dberror.png">
+    <br>
+    <h4>Verifique su conexión a internet o disponibilidad del servcio.</h4>
+  <br>
+</div>
+<ion-content>
+  <div *ngIf="this.dbStatus">
+    <ion-list>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>ID de dispositivo</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.dispositivoId}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Numero de Serie</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.serieNro}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Nombre</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.nombre}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Servicio asociado</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.servicio}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Ubicacion</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.ubicacion}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Tasa de muestreo</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.sampling}}  s</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Sensor de temperatura</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.temperatura | unit}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Sensor de humedad</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.humedad | unit}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Sensor de presion</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.presion | unit}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Canal 1</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.canal1 | unit}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Canal 2</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.canal2 | unit}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Topico de datos</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.topico}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col  size="5">
+              <div>Topico de servicio</div>
+            </ion-col>
+            <ion-col size="3">
+              <div>{{dispositivo.topicoServ}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

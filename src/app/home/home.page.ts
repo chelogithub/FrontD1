@@ -16,6 +16,7 @@ export class HomePage {
   listadoDispositivo: Array<Dispositivo>;
   estado: any;
   dbStatus: boolean;
+  color:any;
   dMode: boolean;
   idDis: any;  //230830
   constructor(public conndb: ApiConnService,
@@ -38,12 +39,28 @@ export class HomePage {
       this.dbStatus=false;
      }
     }
+
     getId(id){
       this.idDis=id;
       console.log("getId = " + id );
       this.navparamService.setNavData(id);
     
     }
+
+    getColor(id2){
+      console.log("paso por getColor  " + id2);
+      switch(id2){
+      case 1:
+        return("primary");
+      case 2:
+        return("secondary");
+      case 3:
+        return("danger");
+      default:
+        return("warning");
+      }    
+    }
+
    ngOnInit(){
 
     }

@@ -46,19 +46,24 @@
   </div> 
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-sm="3" *ngFor="let dispositivo of listadoDispositivo" >
-        <ion-card><!-- <ion-card color={{this.estado}}> -->
-          <ion-card-header >
+      <ion-col size="12" size-sm="3" *ngFor="let dispositivo of listadoDispositivo ; index as i" >
+  
+         <!-- <ion-card *ngIf="(dispositivo.dispositivoId === 1)" color="danger" > -->
 
+         <ion-card  color={{this.getColor(dispositivo.dispositivoId)}} > 
+          <!-- La onda aca es ponerle otra variable -->
+
+
+          <!-- <ion-card *ngIf="dispositivo.humedad" color="danger"><ion-card color={{this.estado}}> -->
+          <ion-card-header >
             <ion-card-title appDirectiva (click)="getId(dispositivo.dispositivoId)" routerLink="/dispositivo/" routerDirection="root" >{{dispositivo.servicio}}</ion-card-title>
             <!-- <ion-card-title appDirectiva routerLink="/dispositivo" routerDirection="root">{{dispositivo.servicio}}</ion-card-title> -->
-
             <ion-card-subtitle appDirectiva>{{dispositivo.ubicacion}}</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
             <h2>{{dispositivo.nombre}}</h2>
-            <ion-label><b>serie</b> - - {{dispositivo.serieNro}}</ion-label>
+            <ion-label color={{this.getColor(i)}}><b>serie</b> - - {{dispositivo.serieNro}} </ion-label>
             <br>
             <ion-label><b>topico</b> -  {{dispositivo.topico}}</ion-label>
           </ion-card-content>

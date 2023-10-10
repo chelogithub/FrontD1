@@ -1,11 +1,10 @@
-
+import { interval} from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiConnService } from '../services/api-conn.service';
 import { TimestampService } from '../services/timestamp.service';
 import { Dispositivo } from '../model/Dispositivo';
 import { ActivatedRoute } from '@angular/router';
 import { Log } from '../model/Log';
-import { interval} from 'rxjs';
 import * as Highcharts from 'highcharts';
 import { VisualStyleService } from '../services/visual-style.service';
 import { NavparamService } from '../services/navparam.service';

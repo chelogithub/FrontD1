@@ -4,6 +4,7 @@ import { ApiConnService } from '../services/api-conn.service';
 import { Dispositivo } from '../model/Dispositivo';
 import { HomePageModule } from './home.module';
 import { DispositivoPage } from '../dispositivo/dispositivo.page';
+import { interval} from 'rxjs';
 import { NavparamService } from '../services/navparam.service';
 
 @Component({
@@ -19,6 +20,8 @@ export class HomePage {
   color:any;
   dMode: boolean;
   idDis: any;  //230830
+  subscription: any;
+  varnum:number;
   constructor(public conndb: ApiConnService,
               private navparamService: NavparamService) {
                                               this.dbStatus=true;
@@ -38,6 +41,7 @@ export class HomePage {
      catch(error){
       this.dbStatus=false;
      }
+     this.subscription = interval(2000).subscribe(() => {console.log('Message every 2 seconds') });
     }
 
     getId(id){
@@ -48,8 +52,12 @@ export class HomePage {
     }
 
     getColor(id2){
-      console.log("paso por getColor  " + id2);
-      switch(id2){
+      //console.log("paso por getColor  " +  Math.random() );
+      if( Math.random()<0.5)
+      {this.varnum=1}
+      else{this.varnum=0}
+      console.log(Number(Math.floor(id2 + this.varnum)));
+      switch(Number(Math.floor(id2 + this.varnum))){
       case 1:
         return("primary");
       case 2:

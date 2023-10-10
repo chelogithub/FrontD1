@@ -33,6 +33,10 @@ const routes: Routes = [
     path: 'nodos',
     loadChildren: () => import('./nodos/nodos.module').then( m => m.NodosPageModule)
   },
+  {
+    path: 'bitacora',
+    loadChildren: () => import('./bitacora/bitacora.module').then( m => m.BitacoraPageModule)
+  },
 
 
 ];

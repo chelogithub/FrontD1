@@ -309,7 +309,7 @@ generarGrafico(){
   });
 }
 
-test() //flag
+ test() //flag
   {
     this.fecha=this.fechaDesde;
     console.log("hola");

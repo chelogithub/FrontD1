@@ -11,7 +11,7 @@ import { Dispositivo } from '../model/Dispositivo';
 })
 export class MedicionesPage implements OnInit {
   idDispositivo: string;
-  dispositivo: Dispositivo = new Dispositivo(0,0,"","","",0,0,0,0,0,0,"","");
+  dispositivo: Dispositivo = new Dispositivo(0,0,"","","",0,0,0,0,0,0,"","","");
   dbStatus: boolean;
   datagraf: any;
 

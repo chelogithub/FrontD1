@@ -33,7 +33,7 @@ export class GraficoPage implements OnInit {
   datagraf5: Array<Array<number>> = new Array<Array<number>>();
   btnGraficoDis: boolean;
   dbStatus: boolean;
-  dispositivo: Dispositivo = new Dispositivo(0,0,"","","",0,0,0,0,0,0,"","");
+  dispositivo: Dispositivo = new Dispositivo(0,0,"","","",0,0,0,0,0,0,"","","");
   graphSeries: Array<any>;
   seriesVect: Array<any>= new Array<any>();
   nombre: string;

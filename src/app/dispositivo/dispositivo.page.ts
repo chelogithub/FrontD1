@@ -8,6 +8,8 @@ import { Log } from '../model/Log';
 import * as Highcharts from 'highcharts';
 import { VisualStyleService } from '../services/visual-style.service';
 import { NavparamService } from '../services/navparam.service';
+import { DisConfig } from '../model/DisConfig';
+import { json } from 'express';
 
 
 require('highcharts/highcharts-more')(Highcharts);
@@ -31,7 +33,7 @@ export class DispositivoPage  {
   canal1: any;
   canal2: any;
   timestamp:any;
-  dispositivo: Dispositivo = new Dispositivo(0,0,"","","",0,0,0,0,0,0,"","");
+  dispositivo: Dispositivo = new Dispositivo(0,0,"","","",0,0,0,0,0,0,"","","");
   fecha: string;
   nombre: string;
   ubicacion: string;
@@ -57,6 +59,7 @@ export class DispositivoPage  {
   dark: boolean;
   newOpt: any;  
   newOpt2: any;
+  cfgcanal: Array<DisConfig>;
 
   maxHumidity= 100;
  
@@ -162,6 +165,13 @@ export class DispositivoPage  {
     try{
            this.dispositivo = await this.conndb.getDispositivo(this.data);
            console.log("Humedad in  =" + this.dispositivo.humedad);
+           console.log(this.dispositivo);
+           //Object.assign(this.cfgcanal,this.dispositivo.cfg);
+
+           this.cfgcanal=JSON.parse(String(this.dispositivo.cfg));
+           console.log(this.cfgcanal);
+           console.log(this.cfgcanal[0].nombre);
+           
            this.med =await this.conndb.getLastLog(this.data);
            console.log(this.med);
            this.temperatura=(this.med.temperatura );

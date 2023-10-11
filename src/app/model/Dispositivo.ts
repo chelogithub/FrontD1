@@ -3,6 +3,8 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-underscore-dangle */
 
+import { DisConfig } from "./DisConfig";
+
 export class Dispositivo{
     private _dispositivoId: number;
     private _serieNro: number;
@@ -17,9 +19,10 @@ export class Dispositivo{
     private _presion: number;
     private _topico: string;
     private _topicoServ: string;
+    private _cfg: Array<DisConfig>;
     
 
-    constructor(dispositivoId,serieNro,nombre,ubicacion,servicio,sampling,canal1,canal2,temperatura,humedad,presion,topico,topicoServ){
+    constructor(dispositivoId,serieNro,nombre,ubicacion,servicio,sampling,canal1,canal2,temperatura,humedad,presion,topico,topicoServ,cfg){
         this._dispositivoId=dispositivoId;
         this._serieNro=serieNro;
         this._nombre=nombre;
@@ -33,6 +36,7 @@ export class Dispositivo{
         this._presion=presion;
         this._topico=topico;
         this._topicoServ=topicoServ;
+        this._cfg=cfg;
        
     }
 
@@ -115,5 +119,11 @@ export class Dispositivo{
     public set topicoServ(value: string) {
       this._topicoServ = value;
       }
+      public get cfg(): Array<DisConfig> {
+        return this._cfg;
+        }
+      public set cfg(value: Array<DisConfig>) {
+        this._cfg = value;
+        }
 
 }

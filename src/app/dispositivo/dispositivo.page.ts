@@ -169,10 +169,13 @@ export class DispositivoPage  {
            //Object.assign(this.cfgcanal,this.dispositivo.cfg);
 
            this.cfgcanal=JSON.parse(String(this.dispositivo.cfg));
+          // this.cfgcanal=JSON.parse('[' + myStr.replace(/,/g, '},{') + ']');
            console.log(this.cfgcanal);
            console.log(this.cfgcanal[0].nombre);
            
            this.med =await this.conndb.getLastLog(this.data);
+           
+           // this.cfgcanal=JSON.parse('[' + myStr.replace(/,/g, '},{') + ']');
            console.log(this.med);
            this.temperatura=(this.med.temperatura );
            this.humedad=this.med.humedad;

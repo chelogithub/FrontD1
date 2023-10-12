@@ -19,7 +19,7 @@ export class BitacoraPage implements OnInit {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
   address:string;
-
+  data: string;
   fechaDesde: any;
   fechaHasta: any;
   listadoDispositivo: any;
@@ -43,7 +43,7 @@ export class BitacoraPage implements OnInit {
                   catch(error){
                     this.dbStatus=false;
                   }
-                  this.subscription = interval(2000).subscribe(() => {console.log('Message every 2 seconds') });
+                  //this.subscription = interval(2000).subscribe(() => {console.log('Message every 2 seconds') });
                  }
 
   ngOnInit() {
@@ -90,7 +90,7 @@ export class BitacoraPage implements OnInit {
 
   confirm() {
     this.modal.dismiss([this.name, this.address], 'confirm');
-   
+    this.enviarBitacora();
   }
 
   onWillDismiss(event: Event) {
@@ -98,5 +98,12 @@ export class BitacoraPage implements OnInit {
     if (ev.detail.role === 'confirm') {
       this.message = `Hello, ${ev.detail.data}!`;
     }
+  }
+
+  async enviarBitacora()
+  {
+    console.log(this.name);
+    console.log(this.address);
+    let a=this.conndb.postBitacora(this.name,this.address,'Prueba');
   }
 }

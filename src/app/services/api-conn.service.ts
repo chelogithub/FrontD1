@@ -68,6 +68,10 @@ export class ApiConnService {
     const body={'topico':topico,'data':data};
     return this._http.post('http://'+this.HOST+':'+this.PORT+'/activaciones/canal/',body,{responseType: "text"}).toPromise();
   }
+  postBitacora(titulo,desc,usuario): Promise<any>{
+    const body={'titulo':titulo,'descripcion':desc,'user':usuario};
+    return this._http.post('http://'+this.HOST+':'+this.PORT+'/bitacora/post/',body,{responseType: "text"}).toPromise();
+  }
   /*postCanal(topico,data): Promise<any> {
     const body={'topico':topico,'data':data};
     return this._http.post<any>('http://192.168.0.186:3000/activaciones/canal/',body).toPromise();

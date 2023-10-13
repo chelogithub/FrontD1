@@ -19,30 +19,36 @@ export class BitacoraPage implements OnInit {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
   address:string;
-  data: string;
+  data: any;
+  dataReady : boolean; 
   fechaDesde: any;
   fechaHasta: any;
-  listadoDispositivo: any;
+  dispositivo: any;
   items = [];
   estado: string;
   dbStatus: boolean;
   subscription: any;
   constructor(public conndb: ApiConnService) { 
                                                 this.dbStatus=true;
+                                                this.dataReady=false; 
+                                                console.log("Constructor device");
+                                                this.data=sessionStorage.getItem('myId');
+                                                console.log('constructor myId = ' + this.data);
                                                 this.callApi();
 
                                               }
 
   async callApi(){
                   try{
-                    this.listadoDispositivo = await this.conndb.getDispositivos();
+                    this.dispositivo = await this.conndb.getDispositivo(this.data);
                     this.estado="warning";  //Prueba para ver el color de la card
                     console.log('DEBUG-home.page.ts  this.conndb.getDispositivos()');
-                    console.log(this.listadoDispositivo);
+                    console.log(this.dispositivo);
                   }
                   catch(error){
                     this.dbStatus=false;
                   }
+                  this.dataReady=true;    //Dibujo página luego de consultar los datos
                   //this.subscription = interval(2000).subscribe(() => {console.log('Message every 2 seconds') });
                  }
 

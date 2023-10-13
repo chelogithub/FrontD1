@@ -55,19 +55,19 @@ export class GraficoPage implements OnInit {
                 this.btnGraficoDis=false;                                        //Arranco mostrando los botones
                 //this.data=this.activatedRoute.snapshot.paramMap.get('id');       //Obtengo el sensor con el id
                 console.log("Constructor graph");
-                console.log('this.data is 1 = ' + this.data);
+                // console.log('this.data is 1 = ' + this.data);
                 //Acá leemos el dato posta
-                this.data=this.navParamService.getNavData();
-                console.log('this.data is 2= ' + this.data);
-                if(!this.data)
-                {
-                  this.data=localStorage.getItem("myId");
+                // this.data=this.navParamService.getNavData();
+                // console.log('this.data is 2= ' + this.data);
+                // if(!this.data)
+                // {
+                  this.data=sessionStorage.getItem('myId');
                   console.log('this.data is 3= ' + this.data);
-                }else
-                  {
-                    localStorage.setItem("myId",this.data);
-                    console.log('this.data is 4= ' + this.data);
-                  }
+                // }else
+                //   {
+                //     localStorage.setItem("myId",this.data);
+                //     console.log('this.data is 4= ' + this.data);
+                //   }
                 this.datosDispositivo();                                         //Traigo de la base los datos del sensor
                 console.log('constructor this.data is = ' + this.data);
 }
@@ -95,6 +95,9 @@ export class GraficoPage implements OnInit {
   ionViewWillEnter() {
     console.log("ionViewWillEnter");
   }
+  ionViewWillLeave(){
+    console.log("ionViewWillLeave");
+  }
 
   async datosDispositivo()
   {
@@ -114,6 +117,7 @@ export class GraficoPage implements OnInit {
        this.dbStatus=false;
      }
   }
+
   async mostrarLogs()
   {
     try{

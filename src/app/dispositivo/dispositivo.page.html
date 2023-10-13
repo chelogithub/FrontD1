@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header *ngIf="this.dataReady">
   <ion-toolbar color="tertiary">
       <ion-buttons slot="start">
           <ion-button routerLink="/home" routerDirection="root">
@@ -17,7 +17,7 @@
     <h4>Verifique su conexión a internet o disponibilidad del servcio.</h4>
   <br>
 </div>
-<ion-content >
+<ion-content *ngIf="this.dataReady">
 <ion-grid *ngIf="this.dbStatus && this.dataReady">     <!-- <ion-grid *ngIf="this.dataReady"></ion-grid> -->
   <ion-row>
     <ion-col size="12" size-sm="4" size-md="3" size-lg="2" *ngFor="let DisConfig of cfgcanal ; index as i">
@@ -162,7 +162,7 @@
 </ion-row>
   <!-- <div id="container2" style="width: 100%; height: 600px;"></div> -->
 </ion-content>
-<ion-footer >
+<ion-footer *ngIf="this.dataReady">
   <ion-toolbar color="medium">
     <h5 *ngIf="this.dataReady" style="text-align:center">Trabajo Final de curso - DAIoT - Marcelo García</h5>
   </ion-toolbar>

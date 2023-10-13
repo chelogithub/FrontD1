@@ -7,7 +7,7 @@
     <br>
     </ion-buttons>
     <!-- <ion-title style="text-align:center;font-weight: bold;font-size:40px;">Registros históricos</ion-title> -->
-    <ion-title style="text-align:left;font-weight: bold;font-size:40px;">Bitacora-{{this.servicio}}-{{this.ubicacion}}-{{this.nombre}}</ion-title>
+    <ion-title *ngIf="this.dataReady" style="text-align:left;font-weight: bold;font-size:40px;">Bitacora-{{dispositivo.servicio}}-{{dispositivo.ubicacion}}-{{dispositivo.nombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 

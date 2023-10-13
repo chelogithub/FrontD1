@@ -25,7 +25,7 @@ require('highcharts/modules/solid-gauge')(Highcharts);
 })
 export class DispositivoPage  {
 
-  data: string;
+  data: any;
   med: Log; // Medida = new Medida('0','0','0','0');
   temperatura: any;
   humedad: any;
@@ -85,19 +85,19 @@ export class DispositivoPage  {
     //   console.log("DMODE OFF");
     // }
 
-    console.log('this.data is 1 = ' + this.data);
-    //Acá leemos el dato posta
-    this.data=this.navParamService.getNavData();
-    console.log('this.data is 2= ' + this.data);
-    if(!this.data)
-    {
-      this.data=localStorage.getItem("myId");
-      console.log('this.data is 3= ' + this.data);
-    }else
-      {
-        localStorage.setItem("myId",this.data);
-        console.log('this.data is 4= ' + this.data);
-      }
+    // console.log('this.data is 1 = ' + this.data);
+    // //Acá leemos el dato posta
+    // this.data=this.navParamService.getNavData();
+    // console.log('this.data is 2= ' + this.data);
+    // if(!this.data)
+    // {
+      this.data=sessionStorage.getItem('myId');
+      console.log('constructor myId = ' + this.data);
+    // }else
+    //   {
+        // localStorage.setItem("myId",this.data);
+        // console.log('myId= ' + this.data);
+      // }
     this.dbStatus=true;
     this.dataReady=false;       //No dibuja página
     this.dbPostStatus=true;
@@ -107,6 +107,9 @@ export class DispositivoPage  {
    // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
     ngOnInit() {
     console.log("ngOnInit");
+    //this.data=sessionStorage.getItem('myId');
+    console.log('ngOnInit myId = ' + this.data);
+    //this.obtenerDatos();
 
   }
 

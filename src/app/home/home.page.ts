@@ -16,6 +16,7 @@ export class HomePage {
 
   listadoDispositivo: Array<Dispositivo>;
   estado: any;
+  data:any;
   dbStatus: boolean;
   color:any;
   dMode: boolean;
@@ -25,6 +26,10 @@ export class HomePage {
   constructor(public conndb: ApiConnService,
               private navparamService: NavparamService) {
                                               this.dbStatus=true;
+                                             
+                                              localStorage.setItem('myId','456');
+                                              sessionStorage.setItem('myId','1');
+                                              console.log('myId= ' + this.idDis);
                                               this.callApi();
                                               }
 
@@ -47,8 +52,12 @@ export class HomePage {
     getId(id){
       this.idDis=id;
       console.log("getId = " + id );
-      this.navparamService.setNavData(id);
-    
+      //this.navparamService.setNavData(id);
+      localStorage.setItem('myId',this.idDis);
+      sessionStorage.setItem('myId',this.idDis);
+      console.log('myId= ' + this.idDis);
+      this.data=localStorage.getItem('myId');
+      console.log('read myId = ' + this.data);
     }
 
     getColor(id2){
@@ -56,7 +65,7 @@ export class HomePage {
       if( Math.random()<0.5)
       {this.varnum=1}
       else{this.varnum=0}
-      console.log(Number(Math.floor(id2 + this.varnum)));
+      // console.log(Number(Math.floor(id2 + this.varnum)));
       switch(Number(Math.floor(id2 + this.varnum))){
       case 1:
         return("primary");
@@ -71,6 +80,11 @@ export class HomePage {
 
    ngOnInit(){
 
+    }
+
+    ionViewWillLeave(){
+      console.log("ionViewWillLeave");
+      this.subscription.unsubscribe();
     }
 }
 

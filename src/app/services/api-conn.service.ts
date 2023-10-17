@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Dispositivo } from '../model/Dispositivo';
 import { Medida } from '../model/Medida';
 import { Log } from '../model/Log';
+import { Bitacora } from '../model/Bitacora';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class ApiConnService {
 
 
 
-
+  bitacora: Promise<Array<Bitacora>>;
   dispositivo:  Promise<Dispositivo>;
   dispositivos: Promise<Array<Dispositivo>>;
   medicion: Promise<Medida>;
@@ -59,6 +60,9 @@ export class ApiConnService {
   getLastLog(id): Promise<Log> {
     return this._http.get<Log>('http://'+this.HOST+':'+this.PORT+'/graf/last/' + id).toPromise();
   }
+  // getLastLog(id): Promise<any> {
+  //   return this._http.get('http://'+this.HOST+':'+this.PORT+'/graf/last/' + id).toPromise();
+  // }
   
   getIntervalo(id,inicio,fin): Promise<any> {
     const body={'inicio':inicio,'fin':fin};
@@ -68,9 +72,14 @@ export class ApiConnService {
     const body={'topico':topico,'data':data};
     return this._http.post('http://'+this.HOST+':'+this.PORT+'/activaciones/canal/',body,{responseType: "text"}).toPromise();
   }
-  postBitacora(titulo,desc,usuario): Promise<any>{
-    const body={'titulo':titulo,'descripcion':desc,'user':usuario};
+  postBitacora(titulo,contenido,usuario,idDis): Promise<any>{
+    const body={'titulo':titulo,'contenido':contenido,'usuario':usuario,'idDis': idDis};
     return this._http.post('http://'+this.HOST+':'+this.PORT+'/bitacora/post/',body,{responseType: "text"}).toPromise();
+  }
+  getBitacora(id):Promise<Array<Bitacora>> {
+    
+    this.bitacora = this._http.get<Array<Bitacora>>('http://'+this.HOST+':'+this.PORT+'/bitacora/get/'+ id).toPromise();
+    return this.bitacora;
   }
   /*postCanal(topico,data): Promise<any> {
     const body={'topico':topico,'data':data};

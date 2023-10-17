@@ -20,105 +20,107 @@
 <ion-content *ngIf="this.dataReady">
 <ion-grid *ngIf="this.dbStatus && this.dataReady">     <!-- <ion-grid *ngIf="this.dataReady"></ion-grid> -->
   <ion-row>
-    <ion-col size="12" size-sm="4" size-md="3" size-lg="2" *ngFor="let DisConfig of cfgcanal ; index as i">
+    <ion-col size="12" size-sm="4" size-md="3" size-lg="2" *ngFor="let DisConfig of cfgcanal2 ; index as i">
      
-       <ion-card *ngIf="this.cfgcanal[i].habilitado">
+       <!-- <ion-card *ngIf="this.cfgcanal[i].habilitado"> -->
+        <ion-card>
         <ion-card-header>
          <ion-card-title style="text-align:center">
-           {{this.cfgcanal[i].nombre}}
+           {{this.cfgcanal2[i].nombre}}
          </ion-card-title>
         </ion-card-header>
         <ion-card-content style="text-align:center">
-          <label style="font-size: 50px"><b>{{this.estado_dispositivo|apertura}}</b></label>
-          <ion-card-subtitle style="text-align:center">{{this.cfgcanal[i].unidad}}</ion-card-subtitle>
+          <!-- <label style="font-size: 50px"><b>{{this.estado_dispositivo|apertura}}</b></label> -->
+          <label style="font-size: 50px"><b>{{this.datos[i].id}}</b></label>
+          <ion-card-subtitle style="text-align:center">{{this.cfgcanal2[i].unidad}}</ion-card-subtitle>
         </ion-card-content>
        </ion-card> 
 
      
-      <!-- <ion-card>
-        <ion-card-header>
-         <ion-card-title style="text-align:center">
-           Estado dispositivo
-         </ion-card-title>
-        </ion-card-header>
-        <ion-card-content style="text-align:center">
-          <label style="font-size: 50px"><b>{{this.estado_dispositivo|apertura}}</b></label>
-        </ion-card-content>
-       </ion-card>
-    </ion-col>
-    <ion-col size="12" size-sm="4" size-md="3" size-lg="2" *ngIf="this.dispositivo.temperatura">
-      <ion-card>
-       <ion-card-header *ngIf="!this.graphOrNum">
-        <ion-card-title style="text-align:center">
-          Temperatura ºC
-        </ion-card-title>
-       </ion-card-header> 
-       <ion-card-content style="text-align:center">
-        <label style="font-size: 50px" *ngIf="!this.graphOrNum"><b>{{this.temperatura}}</b></label>
-            <div id="container" *ngIf="this.graphOrNum"></div>
-       </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="12" size-sm="4" size-md="3" size-lg="2"   *ngIf="this.dispositivo.humedad">
-      <ion-card >
-        <ion-card-header *ngIf="!this.graphOrNum">
-         <ion-card-title style="text-align:center">
-           Humedad %HR
-         </ion-card-title>
-        </ion-card-header>
-        <ion-card-content style="text-align:center">
-          <!-- <label style="font-size: 50px"><b>{{this.humedad}}</b></label> -->
-         <!-- <div id="gauge2" style="Height: fit;"></div>
-        </ion-card-content>
-       </ion-card>
-    </ion-col>
-    <ion-col size="12" size-sm="4" size-md="3" size-lg="2"   *ngIf="this.dispositivo.presion">
-      <ion-card>
-        <ion-card-header>
-         <ion-card-title style="text-align:center">
-           Presion hPa
-         </ion-card-title>
-        </ion-card-header>
-        <ion-card-content style="text-align:center">
-          <label style="font-size: 50px"><b>{{this.presion}}</b></label>
-        </ion-card-content>
-       </ion-card>
-    </ion-col>
-    <ion-col size="12" size-sm="4" size-md="3" size-lg="2"  >
-      <ion-card>
-        <ion-card-header>
-         <ion-card-title style="text-align:center">
-           Ultimo registro
-         </ion-card-title>
-        </ion-card-header>
-        <ion-card-content style="text-align:center">
-          <label style="font-size: 25px"><b>{{this.ts}}</b></label>
-        </ion-card-content>
-       </ion-card>
-    </ion-col>
-    <ion-col size="12" size-sm="4" size-md="3" size-lg="2"  *ngIf="this.dispositivo.canal1">
-      <ion-card>
-        <ion-card-header>
-         <ion-card-title style="text-align:center"> 
-           Canal 1
-         </ion-card-title>
-        </ion-card-header>
-        <ion-card-content style="text-align:center">
-          <label style="font-size: 50px"><b>{{this.canal1 | apertura}}</b></label>
-        </ion-card-content>
-       </ion-card>
-    </ion-col>
-    <ion-col size="12" size-sm="4" size-md="3" size-lg="2"   *ngIf="this.dispositivo.canal2">
-      <ion-card>
-        <ion-card-header>
-         <ion-card-title style="text-align:center">
-           Canal 2
-         </ion-card-title>
-        </ion-card-header>
-        <ion-card-content style="text-align:center">
-          <label style="font-size: 50px"><b>{{this.canal2 | apertura}}</b></label>
-        </ion-card-content>
-       </ion-card> -->
+          <!-- <ion-card>
+            <ion-card-header>
+            <ion-card-title style="text-align:center">
+              Estado dispositivo
+            </ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="text-align:center">
+              <label style="font-size: 50px"><b>{{this.estado_dispositivo|apertura}}</b></label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-sm="4" size-md="3" size-lg="2" *ngIf="this.dispositivo.temperatura">
+          <ion-card>
+          <ion-card-header *ngIf="!this.graphOrNum">
+            <ion-card-title style="text-align:center">
+              Temperatura ºC
+            </ion-card-title>
+          </ion-card-header> 
+          <ion-card-content style="text-align:center">
+            <label style="font-size: 50px" *ngIf="!this.graphOrNum"><b>{{this.temperatura}}</b></label>
+                <div id="container" *ngIf="this.graphOrNum"></div>
+          </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-sm="4" size-md="3" size-lg="2"   *ngIf="this.dispositivo.humedad">
+          <ion-card >
+            <ion-card-header *ngIf="!this.graphOrNum">
+            <ion-card-title style="text-align:center">
+              Humedad %HR
+            </ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="text-align:center">
+              <!-- <label style="font-size: 50px"><b>{{this.humedad}}</b></label> -->
+            <!-- <div id="gauge2" style="Height: fit;"></div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-sm="4" size-md="3" size-lg="2"   *ngIf="this.dispositivo.presion">
+          <ion-card>
+            <ion-card-header>
+            <ion-card-title style="text-align:center">
+              Presion hPa
+            </ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="text-align:center">
+              <label style="font-size: 50px"><b>{{this.presion}}</b></label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-sm="4" size-md="3" size-lg="2"  >
+          <ion-card>
+            <ion-card-header>
+            <ion-card-title style="text-align:center">
+              Ultimo registro
+            </ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="text-align:center">
+              <label style="font-size: 25px"><b>{{this.ts}}</b></label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-sm="4" size-md="3" size-lg="2"  *ngIf="this.dispositivo.canal1">
+          <ion-card>
+            <ion-card-header>
+            <ion-card-title style="text-align:center"> 
+              Canal 1
+            </ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="text-align:center">
+              <label style="font-size: 50px"><b>{{this.canal1 | apertura}}</b></label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-sm="4" size-md="3" size-lg="2"   *ngIf="this.dispositivo.canal2">
+          <ion-card>
+            <ion-card-header>
+            <ion-card-title style="text-align:center">
+              Canal 2
+            </ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="text-align:center">
+              <label style="font-size: 50px"><b>{{this.canal2 | apertura}}</b></label>
+            </ion-card-content>
+          </ion-card> -->
 
 
 

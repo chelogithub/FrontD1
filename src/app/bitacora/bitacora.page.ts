@@ -5,6 +5,9 @@ import { ApiConnService } from '../services/api-conn.service';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { Bitacora } from '../model/Bitacora';
+import { FechaPipe } from '../pipes/fecha.pipe';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-bitacora',
@@ -14,12 +17,20 @@ import { OverlayEventDetail } from '@ionic/core/components';
 
 export class BitacoraPage implements OnInit {
 
+  public alertButtons = ['OK'];
+
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;}
+
   @ViewChild(IonModal) modal: IonModal;
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+
+  bitacora:Array<Bitacora>;
   name: string;
   address:string;
   data: any;
+  idDis: any;
   dataReady : boolean; 
   fechaDesde: any;
   fechaHasta: any;
@@ -28,22 +39,25 @@ export class BitacoraPage implements OnInit {
   estado: string;
   dbStatus: boolean;
   subscription: any;
-  constructor(public conndb: ApiConnService) { 
+  constructor(public conndb: ApiConnService,
+              private alertController: AlertController) { 
                                                 this.dbStatus=true;
                                                 this.dataReady=false; 
                                                 console.log("Constructor device");
-                                                this.data=sessionStorage.getItem('myId');
-                                                console.log('constructor myId = ' + this.data);
+                                                this.idDis=sessionStorage.getItem('myId');
+                                                console.log('constructor myId = ' + this.idDis);
                                                 this.callApi();
 
                                               }
 
   async callApi(){
                   try{
-                    this.dispositivo = await this.conndb.getDispositivo(this.data);
+                    this.dispositivo = await this.conndb.getDispositivo(this.idDis);
                     this.estado="warning";  //Prueba para ver el color de la card
                     console.log('DEBUG-home.page.ts  this.conndb.getDispositivos()');
                     console.log(this.dispositivo);
+                    this.bitacora = await this.conndb.getBitacora(this.idDis);
+                    console.log('Bitacora = ' + JSON.stringify(this.bitacora));
                   }
                   catch(error){
                     this.dbStatus=false;
@@ -53,7 +67,7 @@ export class BitacoraPage implements OnInit {
                  }
 
   ngOnInit() {
-    this.generateItems();
+   this.generateItems();
   }
 
   private generateItems() {
@@ -97,6 +111,7 @@ export class BitacoraPage implements OnInit {
   confirm() {
     this.modal.dismiss([this.name, this.address], 'confirm');
     this.enviarBitacora();
+    this.callApi();
   }
 
   onWillDismiss(event: Event) {
@@ -106,10 +121,30 @@ export class BitacoraPage implements OnInit {
     }
   }
 
+  openModal(i)
+  {
+    console.log("El valor es : "+ i);
+    this.presentAlert(i);
+  }
+
+
+
+
+  async presentAlert(i) {
+    const alert = await this.alertController.create({
+      // header: this.bitacora[i].fecha,
+      subHeader: this.bitacora[i].titulo,
+      message: this.bitacora[i].contenido,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
   async enviarBitacora()
   {
     console.log(this.name);
     console.log(this.address);
-    let a=this.conndb.postBitacora(this.name,this.address,'Prueba');
+    let a=await this.conndb.postBitacora(this.name,this.address,this.idDis,this.idDis);
   }
 }

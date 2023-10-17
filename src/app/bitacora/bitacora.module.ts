@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BitacoraPageRoutingModule } from './bitacora-routing.module';
 
 import { BitacoraPage } from './bitacora.page';
+import { FechaPipe } from '../pipes/fecha.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { BitacoraPage } from './bitacora.page';
     IonicModule,
     BitacoraPageRoutingModule
   ],
-  declarations: [BitacoraPage]
+  declarations: [BitacoraPage, FechaPipe]
 })
 export class BitacoraPageModule {}

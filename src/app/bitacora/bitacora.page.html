@@ -11,10 +11,30 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-header>
+<ion-header color="secondary">
+  <ion-toolbar color="medium">
   <ion-button  id="open-modal" size="small"> Agregar</ion-button>
-  <ion-button  id="open-modal" size="small"> Modificar</ion-button>
-  <ion-button  id="open-modal" size="small"> Buscar</ion-button>
+  <!-- <ion-button  id="open-modal" size="small"> Modificar</ion-button>
+  <ion-button  id="open-modal" size="small"> Buscar</ion-button> -->
+</ion-toolbar>
+</ion-header>
+<ion-header>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-col size="1.5" style="text-align:center;">
+        <ion-label> Fecha </ion-label> 
+      </ion-col>
+      <ion-col size="1.2" style="text-align:center;">
+        <ion-label> Usuario </ion-label> 
+      </ion-col>
+      <ion-col size="2.4" style="text-align:center;">
+        <ion-label > Titulo </ion-label> 
+      </ion-col >
+      <ion-col size="6.8">
+        <ion-label > Descripción</ion-label> 
+      </ion-col>
+    </ion-item>
+  </ion-list>
 </ion-header>
 
 <ion-content>
@@ -67,22 +87,22 @@
                   <ion-buttons slot="start">
                     <ion-button (click)="cancel()">Cancelar</ion-button>
                   </ion-buttons>
-                  <ion-title>Registro de bitácora</ion-title>
+                  <ion-title style="text-align:center;">Registro de bitácora</ion-title>
                   <ion-buttons slot="end">
                     <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
                   </ion-buttons>
                 </ion-toolbar>
               </ion-header>
               <ion-content class="ion-padding">
-                <ion-item>
-                  <ion-label position="stacked">Ingrese el título</ion-label>
-                  <ion-input type="text" placeholder="Your name" [(ngModel)]="name"></ion-input>
+                <ion-item counter="true">
+                  <ion-label position="stacked" >Ingrese el título</ion-label>
+                  <ion-input type="text" placeholder="Título" maxlength="50" [(ngModel)]="name"></ion-input>
                 </ion-item>
-                <ion-item>
+                <ion-item counter="true">
                   <!-- <ion-label position="stacked">Ingrese la descripción</ion-label>
                   <ion-input  type="text" placeholder="Your address" [(ngModel)]="address"></ion-input> -->
-                  <ion-label position="stacked">Ingrese la descripción pulenta</ion-label>
-                  <ion-textarea [autoGrow]="true" type="text" placeholder="Your description" [(ngModel)]="address"></ion-textarea >
+                  <ion-label position="stacked">Ingrese la descripción</ion-label>
+                  <ion-textarea [autoGrow]="true" type="text" maxlength="600" placeholder="Descripción" [(ngModel)]="address"></ion-textarea >
                 </ion-item>
               </ion-content>
             </ng-template>
@@ -97,13 +117,29 @@
       <ion-col size="12" class="ion-align-self-center" style="text-align:center;">
         <!-- <ion-label>Listado de intervenciones</ion-label> -->
 
-        <ion-list>
-          <ion-item *ngFor="let item of items; let index">
-            <ion-avatar slot="start">
+        <ion-list *ngIf="this.dataReady">
+
+          <ion-item (click)="openModal(i)"  *ngFor="let item of bitacora; index as i">
+           
+            <!-- <ion-avatar slot="start">
               <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
               <!-- <img [src]="'file:///home/marcelo/Downloads/warning80x80.png'" alt="avatar" /> -->
-            </ion-avatar>
-            <ion-label> 11-1-2023  14:56 "Ajuste de PID"     "Se realizan cambio en los parametros de configuración kd, kP se observna normales leugo de</ion-label>
+            <!-- </ion-avatar>
+            <ion-label> 11-1-2023  14:56 "Ajuste de PID"     "Se realizan cambio en los parametros de configuración kd, kP se observna normales leugo de</ion-label> --> 
+          <ion-col size="1.5">
+            <ion-label> {{this.bitacora[i].fecha|fecha}} </ion-label> 
+          </ion-col>
+          <ion-col size="1.2" style="text-align:center;">
+            <ion-label> {{this.bitacora[i].usuarioId}}  </ion-label> 
+          </ion-col>
+          <ion-col size="2.4" style="text-align:center;">
+            <ion-label > {{this.bitacora[i].titulo}} </ion-label> 
+          </ion-col> 
+         <ion-col size="6.8">
+            <ion-label > {{this.bitacora[i].contenido}}</ion-label> 
+          </ion-col>
+          <ion-alert  trigger="present-alert" header="Alert"  subHeader="Important message" message="This is an alert!"  [buttons]="alertButtons" ></ion-alert>
+
           </ion-item>
         </ion-list>
         <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">

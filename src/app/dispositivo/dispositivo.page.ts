@@ -3,12 +3,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ApiConnService } from '../services/api-conn.service';
 import { TimestampService } from '../services/timestamp.service';
 import { Dispositivo } from '../model/Dispositivo';
-import { ActivatedRoute } from '@angular/router';
+import { DisConfig } from '../model/DisConfig';
 import { Log } from '../model/Log';
+import { data } from '../model/data';
+import { ActivatedRoute } from '@angular/router';
+
 import * as Highcharts from 'highcharts';
 import { VisualStyleService } from '../services/visual-style.service';
 import { NavparamService } from '../services/navparam.service';
-import { DisConfig } from '../model/DisConfig';
+
 import { json } from 'express';
 
 
@@ -24,7 +27,14 @@ require('highcharts/modules/solid-gauge')(Highcharts);
   styleUrls: ['./dispositivo.page.scss'],
 })
 export class DispositivoPage  {
-
+  mycadena: string;
+  string1: string;
+  string2: string;
+  string3: string;
+  datos: Array<data>;
+  medObj2: any;
+  medObj: any;
+  med2: any;
   data: any;
   med: Log; // Medida = new Medida('0','0','0','0');
   temperatura: any;
@@ -60,6 +70,7 @@ export class DispositivoPage  {
   newOpt: any;  
   newOpt2: any;
   cfgcanal: Array<DisConfig>;
+  cfgcanal2: Array<DisConfig>=new Array<DisConfig>();
 
   maxHumidity= 100;
  
@@ -166,20 +177,70 @@ export class DispositivoPage  {
    async obtenerDatos()
    {
     try{
-           this.dispositivo = await this.conndb.getDispositivo(this.data);
-           console.log("Humedad in  =" + this.dispositivo.humedad);
-           console.log(this.dispositivo);
-           //Object.assign(this.cfgcanal,this.dispositivo.cfg);
 
+            this.med=await this.conndb.getLastLog(this.data);
+            this.med2=JSON.stringify(this.med);
+            this.medObj=JSON.parse('[' + this.med2.replace(/,/g, '},{') + ']');    
+            console.log(this.medObj.length);
+            this.string2="";
+            this.string3='[';
+            for(let i=2;i<this.medObj.length;i++)
+                { 
+                        this.string1=JSON.stringify(this.medObj[i]);
+                        let inicio=this.string1.search('{');
+                        let final=this.string1.search(':');
+                        let c=inicio;
+                            while(c<=final)
+                            {
+                              this.string1=this.string1.replace(this.string1[c],"");
+                              final--; 
+                            }
+                        this.string1=this.string1.replace("","");
+                        let a=this.string2.concat('{"id":',this.string1);
+                        this.string2=a;
+                        this.string2=this.string2.replace(/}{/g, '},{');
+                }
+            this.string3='['+this.string2+']';    
+            this.datos=JSON.parse(this.string3); 
+
+
+           this.dispositivo = await this.conndb.getDispositivo(this.data);
            this.cfgcanal=JSON.parse(String(this.dispositivo.cfg));
-          // this.cfgcanal=JSON.parse('[' + myStr.replace(/,/g, '},{') + ']');
+           let lng=this.cfgcanal2.length;
+           for(let i=0;i<lng;i++)
+           {
+            this.cfgcanal2.pop();
+           }
+           console.log("la longitud dsd del for de this.cfgcanal2 es " + this.cfgcanal2.length);
+           console.log("this.datos");
+           console.log(this.datos);
+
+
+           var j=0;
+           let lng2=this.cfgcanal.length;
+           for(let i=0;i<lng2;i++)
+           {  
+              
+             if (this.cfgcanal[i].habilitado)
+              { 
+                this.cfgcanal2.push(this.cfgcanal[i]);   //this.cfgcanal[i];
+ 
+              }
+              if (!this.cfgcanal[i].habilitado)
+              {
+                console.log(this.datos[i]);
+                this.datos.splice(i-j,1);
+                j++;
+              }
+            }
+           console.log(this.cfgcanal2);
+           console.log("this.datos");
+           console.log(this.datos);
+           console.log("this.medObj");
+           console.log(this.medObj);
+           console.log("this.cfgcanal");
            console.log(this.cfgcanal);
-           console.log(this.cfgcanal[0].nombre);
-           
-           this.med =await this.conndb.getLastLog(this.data);
-           
-           // this.cfgcanal=JSON.parse('[' + myStr.replace(/,/g, '},{') + ']');
-           console.log(this.med);
+
            this.temperatura=(this.med.temperatura );
            this.humedad=this.med.humedad;
            this.presion=this.med.presion;
@@ -196,6 +257,7 @@ export class DispositivoPage  {
      catch (error)
       {
         this.dbStatus=false;
+        console.log('error');
       }
 
       this.dataReady=true;    //Dibujo página luego de consultar los datos
@@ -251,7 +313,7 @@ let data='';
  this.conndb.postCanal(this.topico,data);
 }
 updateChart(){
-  //try{
+  // try{
     //this.mygraph.update({
     this.mygraph[1].update({
       series:[{data:[this.temperatura]}]});
@@ -261,8 +323,8 @@ updateChart(){
      this.mygraph[2].update({
        series:[{data:[this.humedad]}]});}
 
-  //}
- // catch{}
+//   }
+//  catch{}
 }
 
 generarGrafico(){

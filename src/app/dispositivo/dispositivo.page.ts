@@ -32,6 +32,7 @@ export class DispositivoPage  {
   string2: string;
   string3: string;
   datos: Array<data>;
+  datosHnd: Array<data>;
   medObj2: any;
   medObj: any;
   med2: any;
@@ -145,16 +146,16 @@ export class DispositivoPage  {
                                                           if(this.dbStatus)
                                                           {
                                                                 this.obtenerDatos();
-                                                                if(this.graphOrNum){
-                                                                if(this.flag != 1) 
-                                                                {
-                                                                    console.log("paso de prima")
-                                                                    this.generarGrafico(); 
-                                                                    if (this.dispositivo.humedad)this.generarGrafico2(); 
-                                                                }
-                                                                this.flag=1;
-                                                                console.log("paso subscription")
-                                                                this.updateChart();}
+                                                                // if(this.graphOrNum){
+                                                                // if(this.flag != 1) 
+                                                                // {
+                                                                //     console.log("paso de prima")
+                                                                //     this.generarGrafico(); 
+                                                                //     if (this.dispositivo.humedad)this.generarGrafico2(); 
+                                                                // }
+                                                                // this.flag=1;
+                                                                // console.log("paso subscription")
+                                                                // this.updateChart();}
                                                             }
                                                             
                                                         });
@@ -201,19 +202,20 @@ export class DispositivoPage  {
                         this.string2=this.string2.replace(/}{/g, '},{');
                 }
             this.string3='['+this.string2+']';    
-            this.datos=JSON.parse(this.string3); 
+            this.datosHnd=JSON.parse(this.string3); 
 
 
            this.dispositivo = await this.conndb.getDispositivo(this.data);
            this.cfgcanal=JSON.parse(String(this.dispositivo.cfg));
            let lng=this.cfgcanal2.length;
+           //no sirve tiene malos efectos en el dibujo. De la página web.
            for(let i=0;i<lng;i++)
            {
             this.cfgcanal2.pop();
            }
            console.log("la longitud dsd del for de this.cfgcanal2 es " + this.cfgcanal2.length);
            console.log("this.datos");
-           console.log(this.datos);
+           console.log(this.datosHnd);
 
 
            var j=0;
@@ -228,11 +230,12 @@ export class DispositivoPage  {
               }
               if (!this.cfgcanal[i].habilitado)
               {
-                console.log(this.datos[i]);
-                this.datos.splice(i-j,1);
+                console.log(this.datosHnd[i]);
+                this.datosHnd.splice(i-j,1);
                 j++;
               }
             }
+           this.datos=this.datosHnd;        //To avoid flicker when redrar this.datos
            console.log(this.cfgcanal2);
            console.log("this.datos");
            console.log(this.datos);

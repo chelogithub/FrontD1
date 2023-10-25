@@ -14,7 +14,7 @@ import { Bitacora } from '../model/Bitacora';
 })
 export class ApiConnService {
 
-  HOST="localhost";//HOST="192.168.0.186";
+  HOST="192.168.0.186";//HOST="192.168.0.186";
   PORT="8000";
 
 

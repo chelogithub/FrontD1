@@ -31,12 +31,15 @@
         </ion-card-header>
         <ion-card-content style="text-align:center">
           <!-- <label style="font-size: 50px"><b>{{this.estado_dispositivo|apertura}}</b></label> -->
-          <label style="font-size: 50px"><b>{{this.datos[i].id}}</b></label>
+          <!-- <label style="font-size: 50px"><b>{{this.datos[i].id}}</b></label> -->
+          <label *ngIf="this.cfgcanal2[i].representacion=='onoff'" style="font-size: 35px"><b>{{this.datos[i].id | apertura}}</b></label>
+          <label *ngIf="this.cfgcanal2[i].representacion=='fecha'" style="font-size: 30px"><b>{{this.datos[i].id | fecha}}</b></label>
+          <label *ngIf="this.cfgcanal2[i].representacion=='num'" style="font-size: 50px"><b>{{this.datos[i].id }}</b></label>
           <ion-card-subtitle style="text-align:center">{{this.cfgcanal2[i].unidad}}</ion-card-subtitle>
         </ion-card-content>
        </ion-card> 
 
-     
+       <!-- *ngIf="!(this.cfgcanal2[i].unidad==' ')"  -->
           <!-- <ion-card>
             <ion-card-header>
             <ion-card-title style="text-align:center">

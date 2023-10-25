@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AperturaPipe implements PipeTransform {
   data: string;
-  transform(value: number): string {
+  transform(value: any): string {
 
     if(value === 1)
     {

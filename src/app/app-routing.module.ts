@@ -37,6 +37,14 @@ const routes: Routes = [
     path: 'bitacora',
     loadChildren: () => import('./bitacora/bitacora.module').then( m => m.BitacoraPageModule)
   },
+  {
+    path: 'editar-dispositivo',
+    loadChildren: () => import('./editar-dispositivo/editar-dispositivo.module').then( m => m.EditarDispositivoPageModule)
+  },
+  {
+    path: 'modificar-dispositivo',
+    loadChildren: () => import('./modificar-dispositivo/modificar-dispositivo.module').then( m => m.ModificarDispositivoPageModule)
+  },
 
 
 ];

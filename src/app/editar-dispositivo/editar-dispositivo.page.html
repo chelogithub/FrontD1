@@ -1,0 +1,71 @@
+<ion-header *ngIf="this.dataReady">
+  <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+          <ion-button routerLink="/home" routerDirection="root">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title *ngIf="this.dataReady" style="text-align:left;font-weight: bold;font-size:40px;">Editar dispositivos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header color="secondary">
+  <ion-toolbar color="medium">
+  <ion-button   size="small"> Ubicacion</ion-button>
+  <ion-button   size="small"> Servicio</ion-button>
+  <ion-button   size="small"> Tipo</ion-button>
+  <ion-button   size="small"> Nro Serie</ion-button>
+  <ion-button   size="small"> Alta</ion-button>
+
+  <!-- <ion-button  id="open-modal" size="small"> Modificar</ion-button>
+  <ion-button  id="open-modal" size="small"> Buscar</ion-button> -->
+</ion-toolbar>
+</ion-header>
+<ion-header>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-col size="1" style="text-align:center;">
+        <ion-label > Nro serie</ion-label> 
+      </ion-col>
+      <ion-col size="2" style="text-align:center;">
+        <ion-label> Ubicacion </ion-label> 
+      </ion-col>
+      <ion-col size="2" style="text-align:center;">
+        <ion-label> Servicio </ion-label> 
+      </ion-col>
+      <ion-col size="2" style="text-align:center;">
+        <ion-label > Nombre </ion-label> 
+      </ion-col >
+      <ion-col size="5" style="text-align:left;">
+        <ion-label > Detalle </ion-label> 
+      </ion-col >
+    </ion-item>
+  </ion-list>
+</ion-header>
+<ion-content>
+<ion-list *ngIf="this.dataReady">
+  <ion-item  (click)="getId(this.listadoDispositivos[i].dispositivoId)" routerLink="/modificar-dispositivo/" routerDirection="root"  *ngFor="let dispositivo of listadoDispositivos; index as i">      
+    <!-- <ion-avatar slot="start">
+      <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+      <!-- <img [src]="'file:///home/marcelo/Downloads/warning80x80.png'" alt="avatar" /> -->
+    <!-- </ion-avatar>
+    <ion-label> 11-1-2023  14:56 "Ajuste de PID"     "Se realizan cambio en los parametros de configuración kd, kP se observna normales leugo de</ion-label> --> 
+  <ion-col size="1" style="text-align:center;">
+    <ion-label appDirectiva> {{this.listadoDispositivos[i].serieNro}} </ion-label> 
+  </ion-col>
+  <ion-col size="2" style="text-align:center;">
+    <ion-label appDirectiva> {{this.listadoDispositivos[i].ubicacion}}  </ion-label> 
+  </ion-col>
+  <ion-col size="2" style="text-align:center;">
+    <ion-label appDirectiva> {{this.listadoDispositivos[i].servicio}} </ion-label> 
+  </ion-col> 
+ <ion-col size="2"style="text-align:center;">
+    <ion-label appDirectiva> {{this.listadoDispositivos[i].nombre}}</ion-label> 
+  </ion-col>
+  <ion-col size="5"style="text-align:left;">
+    <ion-label appDirectiva> {{this.listadoDispositivos[i].topicoServ}}</ion-label> 
+  </ion-col> 
+
+  </ion-item>
+
+</ion-list>
+</ion-content>

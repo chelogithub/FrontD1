@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { DirectivaDirective } from '../directives/directiva.directive';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { SharedModule } from '../pipes/shared/shared.module';
 
 
 @NgModule({
@@ -13,8 +14,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, DirectivaDirective]
+  declarations: [HomePage]
 })
 export class HomePageModule {}
